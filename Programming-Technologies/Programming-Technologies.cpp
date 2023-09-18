@@ -4,7 +4,7 @@
 
 using namespace std;
 
-//Стуктура элемента списка 
+// Стуктура элемента списка 
 struct Node
 {
     string str = "";
@@ -15,7 +15,7 @@ struct Node
     }
 };
 
-//Класс списка 
+// Класс списка 
 class list
 {
 public:
@@ -41,7 +41,7 @@ public:
         delete head;
     }
 
-    //Добавление элемента в конец списка
+    // Добавление элемента в конец списка
     void push_back(const string& data)
     {
         if (head == nullptr)
@@ -57,9 +57,9 @@ public:
         ++_size;
     }
 
-    //Обращение к первому элементу списка
+    // Обращение к первому элементу списка
     Node* get_head() { return head; }
-    //Возвращает текущий размер списка
+    // Возвращает текущий размер списка
     int size() { return _size; }
 
 private:
@@ -81,8 +81,10 @@ int main() {
 
     // Чтение исходного файла построчно
     ifstream sourceFile(sourceFileName);
+    // Если файл удачно открылся
     if (sourceFile.is_open()) 
     {
+        // Построчно заполняем список
         while (getline(sourceFile, line)) 
         {
             codeLines.push_back(line);
@@ -107,34 +109,43 @@ int main() {
         size_t blockCommentStartPos = currentLine.find("/*");
         size_t blockCommentEndPos = currentLine.find("*/");
 
-
+        // Если найден символ однострочного комментария
         if (singleCommentPos != string::npos) 
         {
+            // Добавляем комментарий в отдельный список и удаляем из исходного списка
             commentLines.push_back(currentLine.substr(singleCommentPos));
             currentLine = currentLine.substr(0, singleCommentPos);
         }
+        // Если найден открывающий символ многострочного комментария
         else if (blockCommentStartPos != string::npos) 
         {
+            // Если также найден закрывающий символ многострочного комментария
             if (blockCommentEndPos != string::npos) 
             {
+                // Полностью добавляем комментарий в отдельный список и удаляем из исходного списка
                 commentLines.push_back(currentLine.substr(blockCommentStartPos, blockCommentEndPos - blockCommentStartPos + 2));
                 currentLine = currentLine.substr(0, blockCommentStartPos) + currentLine.substr(blockCommentEndPos + 2);
             }
             else 
             {
+                // Частично добавляем комментарий в отдельный список и удаляем из исходного списка
                 commentLines.push_back(currentLine.substr(blockCommentStartPos));
                 currentLine = currentLine.substr(0, blockCommentStartPos);
                 blockComment = true;
             }
         }
+        // Если найден закрывающий символ многострочного комментария
         else if (blockCommentEndPos != string::npos) 
         {
+            // Частично добавляем комментарий в отдельный список и удаляем из исходного списка
             commentLines.push_back(currentLine.substr(0, blockCommentEndPos + 2));
             currentLine = currentLine.substr(blockCommentEndPos + 2);
             blockComment = false;
         }
+        // Если в предыдущих строках не был закрыт многострочный комментарий
         else if (blockComment) 
         {
+            // Добавляем всю строку в отдельный список и удаляем из исходного
             commentLines.push_back(currentLine);
             currentLine = "";
         }
