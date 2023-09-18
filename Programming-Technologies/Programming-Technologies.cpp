@@ -73,7 +73,7 @@ private:
 int main() {
     setlocale(LC_ALL, "RU");
     string sourceFileName = "input.txt";
-    string commentFileName = "comments.txt";
+    string commentFileName = "output.txt";
     string line;
 
     list codeLines;
