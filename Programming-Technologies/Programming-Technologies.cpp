@@ -72,7 +72,7 @@ private:
 
 int main() {
     setlocale(LC_ALL, "RU");
-    string sourceFileName = "input.txt";
+    string sourceFileName = "input.cpp";
     string commentFileName = "output.txt";
     string line;
 
@@ -101,7 +101,7 @@ int main() {
     bool blockComment = false;
 
     Node* currentItem = codeLines.get_head();
-    for (auto it = 0; it < codeLines.size() - 1; ++it)
+    for (auto it = 0; it < codeLines.size(); ++it)
     {
         string currentLine = currentItem->str;
 
@@ -149,6 +149,10 @@ int main() {
             commentLines.push_back(currentLine);
             currentLine = "";
         }
+
+        // Перезаписываем измененную строку
+        currentItem->str = currentLine;
+        // Обращаемся к следующему элементу списка
         currentItem = currentItem->next;
     }
 
@@ -157,7 +161,7 @@ int main() {
     if (updatedSourceFile.is_open()) 
     {
         Node* currentItem = codeLines.get_head();
-        for (size_t i = 0; i < codeLines.size() - 1; i++)
+        for (size_t i = 0; i < codeLines.size(); i++)
         {
             string currentLine = currentItem->str;
             updatedSourceFile << currentLine << endl;
@@ -177,7 +181,7 @@ int main() {
     if (commentFile.is_open()) 
     {
         Node* currentItem = commentLines.get_head();
-        for (size_t i = 0; i < commentLines.size() - 1; i++)
+        for (size_t i = 0; i < commentLines.size(); i++)
         {
             string currentLine = currentItem->str;
 
