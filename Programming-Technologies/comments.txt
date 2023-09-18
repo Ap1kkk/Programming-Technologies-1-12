@@ -1,0 +1,69 @@
+//#include <list> d
+///*test*/";
+/* string& operator [] (int index)
+     {
+         string outString;
+         auto outElement = head;
+         while (outElement->next)
+         {
+             outElement = outElement->next;
+         }
+         outString = outElement->str;
+         return outString;
+     }*/
+//list<string> codeLines;
+//list<string> commentLines;
+// Чтение исходного файла построчно
+// Поиск и удаление комментариев и запись их в список комментариев
+//");
+/*");
+        size_t blockCommentEndPos = currentLine.find("*/
+// Запись кода без комментариев в исходный файл
+// Запись комментариев в отдельный файл
+// ----- generated code ------
+//for (auto it = codeLines.begin(); it != codeLines.end(); ++it) {
+//    size_t singleCommentPos = it->find("//");
+//    size_t blockCommentStartPos = it->find("/*");
+//    size_t blockCommentEndPos = it->find("*/");
+//    if (singleCommentPos != string::npos) {
+//        commentLines.push_back(it->substr(singleCommentPos));
+//        *it = it->substr(0, singleCommentPos);
+//    }
+//    else if (blockCommentStartPos != string::npos) {
+//        if (blockCommentEndPos != string::npos) {
+//            commentLines.push_back(it->substr(blockCommentStartPos, blockCommentEndPos - blockCommentStartPos + 2));
+//            *it = it->substr(0, blockCommentStartPos) + it->substr(blockCommentEndPos + 2);
+//        }
+//        else {
+//            commentLines.push_back(it->substr(blockCommentStartPos));
+//            *it = it->substr(0, blockCommentStartPos);
+//            blockComment = true;
+//        }
+//    }
+//    else if (blockCommentEndPos != string::npos) {
+//        commentLines.push_back(it->substr(0, blockCommentEndPos + 2));
+//        *it = it->substr(blockCommentEndPos + 2);
+//        blockComment = false;
+//    }
+//    else if (blockComment) {
+//        commentLines.push_back(*it);
+//        *it = "";
+//    }
+//}
+//// Запись кода без комментариев в исходный файл
+//ofstream updatedSourceFile(sourceFileName);
+//if (updatedSourceFile.is_open()) {
+//    for (const string& codeLine : codeLines) {
+//        updatedSourceFile << codeLine << endl;
+//    }
+//    updatedSourceFile.close();
+//}
+//else {
+//    cout << "Не удалось открыть исходный файл для записи." << endl;
+//    return 0;
+//}
+//// Запись комментариев в отдельный файл
+//ofstream commentFile(commentFileName);
+//if (commentFile.is_open()) {
+//    for (const string& commentLine : commentLines) {
+//        commentFile << commentLine << endl;
